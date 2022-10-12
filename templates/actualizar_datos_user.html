@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block css %}<link rel="stylesheet" type= "text/css" href="{{ url_for('static',filename='css/inicio.css') }}">{% endblock %}
+    
+{% block title %}Inicio{% endblock %}
+
+{% block body %}
+    {% block navbar %}
+        <nav class="nav1">
+            <a href="">{{super()}}</a>
+            <a class="item" href="/">Inicio</a>
+            <a class="item" href="/Productos">Productos</a>
+                {% if current_user.tipo == 0 %}
+                <a class="item" href="/Insumos">Insumos</a>
+                {% else %}
+                
+                {% endif %}
+            <a class="item" href="/#">Ventas</a>
+            <a class="item" href="/cerrarSession">Salir</a>
+        </nav>
+    {% endblock %}
+    <br><br>
+    <h1 class="bienvenida"><b>Bienvenido a Los Abuelos {{current_user.nombre}} {{current_user.apellido}}</b></h1>
+
+    {{current_user.usuario}}
+
+{% endblock %}

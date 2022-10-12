@@ -1,0 +1,20 @@
+.alert {
+    width: 450px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    left: 0;
+    margin: auto;
+    margin-top: 1rem;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    bottom: 2.5rem;
+    z-index: 1;
+}
+
+.close{
+    background-color: transparent;
+    color: red;
+    border: transparent;
+    font-size: 20px;
+}

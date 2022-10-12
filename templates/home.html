@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+BIENVENIDA - DOCENTE
+{% endblock %}
+
+{% include 'partials/_navbar.html' %}
+
+{% block body %}
+
+<section>
+  <div class="d-grid gap-2 col-4 mx-auto p-4 m-5 text-center bg-dark text-white" style="border-radius: 1rem;">
+    {% include 'partials/_msj.html' %}
+    <h2 class="fw-bold m-1 p-1 text-uppercase">Bienvenido/a</h2>
+    <h4 class="fw-semibold m-1 p-1 text-uppercase">{{lista[4]}}, {{lista[5]}}</h4>
+    <h5 class="p-1 m-1">¿Qué acción deseas realizar?</h5>
+
+    
+      <form action="#" method="GET" class="d-grid">
+        <a href="{{url_for('GetDatos')}}" class="btn btn-secondary mb-1 fw-semibold" type="button">MODIFICAR DATOS PERSONALES</a>
+        <a href="#" class="btn btn-secondary mb-1 fw-semibold" type="button">VER DATOS LABORALES</a>
+        <a href="#" class="btn btn-secondary mb-1 fw-semibold" type="button">LICENCIAS</a>
+        <a href="https://ifspp1-sgo.infd.edu.ar/aula/acceso.cgi" target=”_blank” class="btn btn-danger mb-1 fw-semibold" type="button">IR A INFD</a>
+      </form>
+    
+
+  </div>
+</section>
+
+{% endblock %}

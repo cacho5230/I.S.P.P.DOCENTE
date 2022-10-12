@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+CONTRASEÑA TEMPORAL
+{% endblock %}
+
+{% block body %}
+
+<form action="/first_login" method="POST" class="container vh-100 gradient-custom">
+    <div class="container py-3 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-dark text-white" style="border-radius: 2rem;">
+                    <div class="card-body p-5 text-center">
+
+                        <div class="mb-md-1 mt-md-1 pb-1">
+
+                            {% include 'partials/_msj.html' %}
+
+                            <h2 class="fw-bold mb-1 text-uppercase">I.S.P.P N° 1</h2>
+                            <div class="text-center mb-2">
+                                <img src="../static/img/logoFinal.png" class="rounded" alt="logo" width="40%">
+                              </div>
+                            <p class="text-white-50 mb-2 text-white">POR CAMBIE INGRESE UN EMAIL E INDIQUE UNA CONTRASEÑA NUEVA</p>
+
+                            <div class="form-outline form-white mb-3">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <label for="correo">EMAIL</label>
+                                <input type="text" placeholder="Ingrese un Correo Electrónico válido" name="correo"
+                                    class="entrada form-control" required>
+                            </div>
+
+                            <div class="form-outline form-white mb-3">
+                                <label for="contraseña">CONTRASEÑA NUEVA</label>
+                                <input type="password" placeholder="Ingrese la nueva contraseña" name="newpw" id="newpw"
+                                    class="entrada form-control" required>
+                            </div>
+
+                            <input type="submit" value="GUARDAR" class="submit btn btn-success mb-1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}

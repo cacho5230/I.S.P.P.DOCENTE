@@ -1,0 +1,27 @@
+{% macro Alertas()%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/alertas.css') }}">
+<h6>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <h5>
+                <div class="alerta" role="alert" align="center">
+                    <strong class="mensaje">{{message}}</strong>
+                    <button type="button" class="close"><span>&times;</span></button>
+                </div>
+            </h5>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</h6>
+
+<div class="alert alert-success d-flex align-items-center" role="alert">
+    <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:">
+    <use xlink:href="#check-circle-fill" />
+    </svg>
+<div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="{{url_for('static', filename='/scripts/alertas.js')}}"></script>
+
+        {% endmacro %}

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}
+DATOS PERSONALES - DOCENTE
+{% endblock %}
+
+{% include 'partials/_navbar.html' %}
+
+{% block body %}
+
+<section>
+
+    <div class="d-grid gap-2 col-5 mx-auto p-4 m-5 text-center bg-dark text-white" style="border-radius: 1rem;">
+
+        {% include 'partials/_msj.html' %}
+
+        <h2 class="fw-bold m-1 p-1 text-uppercase">DATOS PERSONALES</h2>
+
+        <div class="card bg-secondary w-100 rounded-3" style="width: 12rem;">
+            <div class="card-body text-dark">
+                <h4 class="card-title fw-bold">{{info[4]}}, {{info[5]}}</h4>
+                <p class="card-text fw-bold">DNI: {{info[1]}} <br>EMAIL: {{info[6]}}<br></p>
+            </div>
+        </div>
+        <div class="card bg-secondary w-100 rounded-3" style="width: 12rem;">
+            <div class="card-body text-dark">
+                <form action="/ver/" method="POST" class="form-inline p-2">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <div class="form-group mb-2 text-light pb-3">
+                        <label for="TelLabel" class="">TELEFONOS DE CONTACTO</label>
+                        <input type="text" class="form-control" name="tel" value="{{info[22]}}">
+
+                        <label for="CiudLabel" class="">CIUDAD</label>
+                        <input type="text" class="form-control" name="ciudad" value="{{info[23]}}">
+
+                        <label for="PaisLabel" class="">PAIS</label>
+                        <input type="text" class="form-control" name="pais" value="{{info[24]}}">
+
+                        <label for="CUILLabel" class="">CUIL</label>
+                        <input type="number" class="form-control" name="cuil" value="{{info[9]}}">
+
+                        <label for="NacLabel" class="">NACIONALIDAD</label>
+                        <input type="text" class="form-control" name="nacionalidad" value="{{info[10]}}">
+
+                        <label for="FNacLabel" class="">FECHA DE NACIMIENTO</label>
+                        <input type="text" class="form-control" name="fecha_nacim" value="{{info[11]}}">
+                        
+                        <label for="SexLabel" class="">SEXO</label>
+                        <input type="text" class="form-control" name="sexo" value="{{info[12]}}">
+                        
+                        <label for="TitLabel" class="">TÍTULO</label>
+                        <input type="text" class="form-control" name="titulo" value="{{info[13]}}">
+
+                        <label for="CalleLabel" class="">CALLE</label>
+                        <input type="text" class="form-control" name="calle" value="{{info[14]}}">
+
+                        <label for="NumLabel" class="">NÚMERO</label>
+                        <input type="text" class="form-control" name="numero" value="{{info[15]}}">
+
+                        <label for="PisoLabel" class="">PISO</label>
+                        <input type="text" class="form-control" name="piso" value="{{info[16]}}">
+
+                        <label for="DptoLabel" class="">DEPARTAMENTO</label>
+                        <input type="text" class="form-control" name="departamento" value="{{info[17]}}">
+
+                        <label for="MzaLabel" class="">MANZANA</label>
+                        <input type="text" class="form-control" name="manzana" value="{{info[18]}}">
+
+                        <label for="BarrioLabel" class="">BARRIO</label>
+                        <input type="text" class="form-control" name="barrio" value="{{info[19]}}">
+
+                        <label for="CpLabel" class="">CP</label>
+                        <input type="text" class="form-control" name="cp" value="{{info[20]}}">
+
+                        <label for="ProvLabel" class="">PROVINCIA</label>
+                        <input type="text" class="form-control" name="provincia" value="{{info[21]}}">
+
+                        <label for="ObsLabel" class="">OBSERVACIONES</label>
+                        <input type="text" class="form-control" name="observaciones" value="{{info[25]}}">
+                    </div>
+
+                        <button type="submit" class="btn btn-success  fw-bold">GUARDAR</button>
+                </form>
+                <a href="{{url_for('index')}}" class="card-link"><button class="btn btn-danger mb-1 fw-bold">VOLVER AL INICIO</button></a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

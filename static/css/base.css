@@ -1,0 +1,10 @@
+body {
+    background: rgb(17, 82, 255);
+    background: linear-gradient(140deg, rgba(17, 82, 255, 1) 0%, rgba(122, 221, 246, 1) 50%, rgba(214, 214, 214, 1) 100%);
+}
+
+
+a:link a:visited a:active {
+    color: white;
+    text-decoration: none;
+}
