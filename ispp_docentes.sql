@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3309
--- Tiempo de generación: 12-10-2022 a las 22:27:16
--- Versión del servidor: 10.4.21-MariaDB
--- Versión de PHP: 7.3.31
+-- Host: localhost:3309
+-- Generation Time: Oct 23, 2022 at 02:43 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 7.3.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,35 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `ispp_docentes`
+-- Database: `ispp_docentes`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuario_datos`
+-- Table structure for table `cargo`
+--
+
+CREATE TABLE `cargo` (
+  `id_cargo` int(11) NOT NULL,
+  `nombre_cargo` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `observaciones` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Dumping data for table `cargo`
+--
+
+INSERT INTO `cargo` (`id_cargo`, `nombre_cargo`, `observaciones`) VALUES
+(1, 'rector', NULL),
+(2, 'vicerector', NULL),
+(3, 'pro_secretario', NULL),
+(4, 'secretario', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usuario_datos`
 --
 
 CREATE TABLE `usuario_datos` (
@@ -45,47 +67,58 @@ CREATE TABLE `usuario_datos` (
   `tel_user` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `ciudad` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `pais` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `observacion` varchar(200) COLLATE utf8_spanish_ci NOT NULL
+  `observacion` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `localidad` varchar(120) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `usuario_datos`
+-- Dumping data for table `usuario_datos`
 --
 
-INSERT INTO `usuario_datos` (`id_user`, `CUIL`, `Nacionalidad`, `fecha_nacim`, `sexo`, `titulo`, `calle`, `numero`, `piso`, `dpto`, `mza`, `barrio`, `cp`, `provincia`, `tel_user`, `ciudad`, `pais`, `observacion`) VALUES
-(1, '', '', '', '', '', '', 0, 0, 0, 0, '', 0, '', '', '', '', 'none'),
-(4, '', '', '', '', '', '', 0, 0, 0, 0, '', 0, '', '', '', '', '1'),
-(13, '', '', '', '', '', '', 0, 0, 0, 0, '', 0, '', '', '', '', 'nuevo registro'),
-(22, '', '', '', '', '', '', 0, 0, 0, 0, '', 0, '', '', '', '', ''),
-(100, '', '', '', '', '', '', 0, 0, 0, 0, '', 0, '', '', '', '', ''),
-(132, '', '', '', '', '', '', 0, 0, 0, 0, '', 0, '', '3855555500000', 'santiago', 'argentina', ''),
-(172, '', '', '', '', '', '', 0, 0, 0, 0, '', 0, '', '', '', '', ''),
-(315, '', '', '', '', '', '', 0, 0, 0, 0, '', 0, '', '', '', '', ''),
-(322, '', '', '', '', '', '', 0, 0, 0, 0, '', 0, '', '', '', '', ''),
-(333, '', '', '', '', '', '', 0, 0, 0, 0, '', 0, '', '', '', '', ''),
-(335, '', '', '', '', '', '', 0, 0, 0, 0, '', 0, '', '', '', '', ''),
-(347, '20387374761', 'Argentino', '09-07-1995', 'masculino', 'tecnico', 'sarmiento', 782, 1, 2, 1, 'fco de aguirre', 4200, 'santiago del estero', '3855808021', 'santiago', 'argentina', 'nada'),
-(348, '', '', '', '', '', '', 0, 0, 0, 0, '', 0, '', '', '', '', '');
+INSERT INTO `usuario_datos` (`id_user`, `CUIL`, `Nacionalidad`, `fecha_nacim`, `sexo`, `titulo`, `calle`, `numero`, `piso`, `dpto`, `mza`, `barrio`, `cp`, `provincia`, `tel_user`, `ciudad`, `pais`, `observacion`, `localidad`) VALUES
+(335, '', '', '', '', '', '', 0, 0, 0, 0, '', 0, '', '', '', '', '', ''),
+(347, '20387374761', 'Argentino', '2022-07-13', 'MASCULINO', 'tecnico', 'sarmiento', 782, 1, 2, 1, 'fco de aguirre', 4200, 'santiago del estero', '3855808021', 'santiago', 'argentina', 'nada', '');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuario_personal`
+-- Table structure for table `usuario_domicilio`
+--
+
+CREATE TABLE `usuario_domicilio` (
+  `id_domiclio` int(11) NOT NULL,
+  `pais` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `provincia` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `localidad` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
+  `ciudad` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
+  `cp` int(11) NOT NULL,
+  `barrio` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `mza` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `dpto` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `piso` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `numero` int(11) DEFAULT NULL,
+  `calle` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usuario_personal`
 --
 
 CREATE TABLE `usuario_personal` (
   `id_user` int(11) NOT NULL,
   `dni_user` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   `pw_user` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
-  `pw_temp` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `pw_temp` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `ape_user` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `nom_user` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `email_user` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `status_user` int(11) NOT NULL
+  `email_user` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `status_user` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `usuario_personal`
+-- Dumping data for table `usuario_personal`
 --
 
 INSERT INTO `usuario_personal` (`id_user`, `dni_user`, `pw_user`, `pw_temp`, `ape_user`, `nom_user`, `email_user`, `status_user`) VALUES
@@ -435,45 +468,77 @@ INSERT INTO `usuario_personal` (`id_user`, `dni_user`, `pw_user`, `pw_temp`, `ap
 (344, '20564793', '', '20564793', 'YBARRA', 'RAMON ALEJANDRO', '', 0),
 (345, '25517270', '', '25517270', 'YÑIGUEZ', 'JULIA NANCY', '', 0),
 (346, '34243605', '', '34243605', 'YSAS', 'JORGE EXEQUIEL', '', 0),
-(347, '123456', '', '123456', 'JUAREZ', 'PEPITO', 'test@mailmail.com', 0),
-(348, '1', 'pbkdf2:sha256:260000$rc1w3OhYhpc1ZVv3$aa26a2d3089a2e894e9d2139a98115aedcab2275f67627cd87d72164f10c8407', '', 'Tester', 'Prueba', 'tester@gmail.com', 0);
+(347, '123456', 'pbkdf2:sha256:260000$K4MB8jwLZbVBzr5r$88d3140ae2c808cd14b28bcffdb635bb0168871bde0e8f05dacc7eb82b2c6760', NULL, 'JUAREZ', 'PEPITO', 'juarezpepito@mail.com', 0),
+(348, '1', 'pbkdf2:sha256:260000$Y2lBLA4SZaNvkatg$010fad566c1325dda163032b0145bb4173159d8c819d86cb47e739e381175f10', NULL, 'Tester', 'Prueba', '123@mail.com', 0),
+(349, '2', 'pbkdf2:sha256:260000$FzBsMOI0OseC4nnQ$fac95e7aeb50ba2b5ce1b9f04f581b8cd41368aca7f2d57a91b0178dfd223877', NULL, 'Morales', 'Cristian', 'cristianmorales33@gmail.com', 0),
+(350, '3', 'pbkdf2:sha256:260000$rtiPnzSXDOl3kanq$870def785d041795e771eb92094df4a7cee81b0aa513c72e7cdbce7febae5c6c', NULL, 'Guzman', 'Mafalda', '123@mail.com', NULL);
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `usuario_datos`
+-- Indexes for table `cargo`
+--
+ALTER TABLE `cargo`
+  ADD PRIMARY KEY (`id_cargo`);
+
+--
+-- Indexes for table `usuario_datos`
 --
 ALTER TABLE `usuario_datos`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- Indices de la tabla `usuario_personal`
+-- Indexes for table `usuario_domicilio`
+--
+ALTER TABLE `usuario_domicilio`
+  ADD PRIMARY KEY (`id_domiclio`);
+
+--
+-- Indexes for table `usuario_personal`
 --
 ALTER TABLE `usuario_personal`
   ADD PRIMARY KEY (`id_user`),
   ADD UNIQUE KEY `dni_user` (`dni_user`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `usuario_personal`
+-- AUTO_INCREMENT for table `cargo`
+--
+ALTER TABLE `cargo`
+  MODIFY `id_cargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `usuario_domicilio`
+--
+ALTER TABLE `usuario_domicilio`
+  MODIFY `id_domiclio` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `usuario_personal`
 --
 ALTER TABLE `usuario_personal`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=349;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=351;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `usuario_datos`
+-- Constraints for table `usuario_datos`
 --
 ALTER TABLE `usuario_datos`
   ADD CONSTRAINT `existe` FOREIGN KEY (`id_user`) REFERENCES `usuario_personal` (`id_user`);
+
+--
+-- Constraints for table `usuario_domicilio`
+--
+ALTER TABLE `usuario_domicilio`
+  ADD CONSTRAINT `domicilio` FOREIGN KEY (`id_domiclio`) REFERENCES `usuario_personal` (`id_user`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
