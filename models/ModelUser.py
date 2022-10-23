@@ -9,26 +9,23 @@ class modeloUsuario():
             sql = 'SELECT * FROM usuario_personal WHERE dni_user = %s '
             cur.execute(sql,([user.dni]))
             row = cur.fetchone()
-            print(row) #impresion de tupla user
             if row != None:
-                pwUser = row[2]
-                pwTemp = row[3]
-                print('hasheo pw normal')
-                pwNormalHash = (User.GenerateHashFunction(pwTemp))
-                print('hasheo pw temp')
-                pwTempHash = (User.GenerateHashFunction(pwTemp))
-                print(pwNormalHash +'\n' +pwTempHash)
-                User.CheckPwFunction(pwNormalHash, pwUser)
-                if pwTemp != None:
-                    User.CheckPwFunction(pwTempHash, pwTemp)
-                else:
-                    pwTemp=False
-                user = User(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7])
-                print(user) #objeto usuario
+                user = User(row[0],row[1],User.CheckPwFunction(row[2], user.pw),row[3],row[4],row[5],row[6],row[7])
+                print(user) #objeto usuario de prueba
                 return user
             else:
                 print('invalido')
                 return None
+        except Exception as ex:
+            raise Exception(ex)
+
+    @classmethod
+    def PrimerLoginFunction(self,mysql,id,pw,email):
+        try:
+            cur = mysql.connection.cursor()
+            sql = 'UPDATE usuario_personal SET pw_temp = NULL, pw_user = %s, email_user = %s WHERE id_user = %s'
+            cur.execute(sql,([User.GenerateHashFunction(pw)],[str(email)],[int(id)]))
+            mysql.connection.commit()
         except Exception as ex:
             raise Exception(ex)
 
@@ -84,12 +81,4 @@ class modeloUsuario():
         except Exception as ex:
             raise Exception(ex)
 
-    @classmethod
-    def PrimerLoginFunction(self,mysql,id,pw,email):
-        try:
-            cur = mysql.connection.cursor()
-            sql = 'UPDATE usuario_personal SET pw_temp = NULL, pw_user = %s, email_user = %s WHERE id_user = %s'
-            cur.execute(sql,([User.GenerateHashFunction(pw)],[str(email)],[int(id)]))
-            mysql.connection.commit()
-        except Exception as ex:
-            raise Exception(ex)
+    

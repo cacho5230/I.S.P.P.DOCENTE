@@ -32,9 +32,10 @@ def index():
             print(tupl)
             return render_template('home.html', lista = tupl)
     else:
-        idUser = request.form['usuario']
+        dniUser = request.form['usuario']
         pwUser = request.form['contraseña']
-        user = User(idUser, pwUser)
+        user = User(dniUser=dniUser, pwUser=pwUser)
+        print(user.pw)
         user = modeloUsuario.loginFunction(mysql, user)
         print("checkpoint 1 login")
         if user == None:
@@ -48,15 +49,16 @@ def index():
                 flash('ACTRUALIZA ESTOS DATOS ANTES DE CONTINUAR')
                 login_user(user)
                 return render_template('first_login.html')
-            #LOGIN PW NORMAL
-            print('Login con pw normal')
-            login_user(user)
-            flash('SESION INICIADA')
-            cur = mysql.connection.cursor()
-            cur.execute('SELECT * FROM usuario_personal WHERE id_user = %s', [str(current_user.id)])
-            tupl = cur.fetchone()
-            print(tupl)
-            return render_template('home.html', lista = tupl)
+            elif user.pw:
+                #LOGIN PW NORMAL
+                print('Login con pw normal')
+                login_user(user)
+                flash('SESION INICIADA')
+                cur = mysql.connection.cursor()
+                cur.execute('SELECT * FROM usuario_personal WHERE id_user = %s', [str(current_user.id)])
+                tupl = cur.fetchone()
+                print(tupl)
+                return render_template('home.html', lista = tupl)
         else:
             flash('USUARIO O CONTRASEÑA INCORRECTA')
             return redirect(url_for('index'))
@@ -75,6 +77,7 @@ def FirstLogin():
             print(creado)
         correo = request.form['correo']
         newpw = request.form['newpw']
+        print(newpw)
         modeloUsuario.PrimerLoginFunction(mysql,current_user.id,newpw,correo)
     return redirect(url_for('index'))
 
@@ -113,6 +116,33 @@ def GetDatos():
         flash('DATOS ACTUALIZADOS CORRECTAMENTE')
         mysql.connection.commit()
         return redirect(url_for('GetDatos'))
+
+# @app.route('/domicilio/', methods=['GET','POST'])
+# def GetDatos():
+#     idUser = current_user.id
+#     if request.method == 'GET':
+#         print(idUser)
+#         cur = mysql.connection.cursor()
+#         cur.execute('SELECT * FROM usuario_personal p INNER JOIN usuario_datos d on p.id_user = d.id_user WHERE p.id_user = %s', [str(idUser)])
+#         data = cur.fetchone()
+#         print(data)
+#         return render_template('datos.html', info = data)
+#     else:
+#         request.method == 'POST'
+#         calle = request.form['calle']
+#         numero = request.form['numero']
+#         piso = request.form['piso']
+#         departamento = request.form['departamento']
+#         manzana = request.form['manzana']
+#         barrio = request.form['barrio']
+#         cp = request.form['cp']
+#         provincia = request.form['provincia']
+#         cur = mysql.connection.cursor()
+#         cur.execute("""UPDATE usuario_datos 
+#             SET tel_user = %s, ciudad = %s, pais = %s, observacion = %s, CUIL=%s, Nacionalidad=%s, fecha_nacim=%s, sexo=%s, titulo=%s, calle=%s, numero=%s, piso=%s, dpto=%s, mza=%s, barrio=%s, cp=%s, provincia=%s WHERE id_user = %s""", (calle,numero,piso,departamento,manzana,barrio,cp,provincia,idUser))
+#         flash('DATOS ACTUALIZADOS CORRECTAMENTE')
+#         mysql.connection.commit()
+#         return redirect(url_for('index'))
 
         
 @app.route('/cerrarSesion')

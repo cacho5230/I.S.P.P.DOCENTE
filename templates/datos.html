@@ -42,42 +42,23 @@ DATOS PERSONALES - DOCENTE
                         <label for="NacLabel" class="">NACIONALIDAD</label>
                         <input type="text" class="form-control" name="nacionalidad" value="{{info[10]}}">
 
-                        <label for="FNacLabel" class="">FECHA DE NACIMIENTO</label>
-                        <input type="text" class="form-control" name="fecha_nacim" value="{{info[11]}}">
+                        <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
+                            <label for="FNacLabel" class="">FECHA DE NACIMIENTO</label>
+                            <input placeholder="Ingrese tu fecha " type="date" class="form-control" name="fecha_nacim">
+                            <i class="fas fa-calendar input-prefix"></i>
+                          </div>
                         
                         <label for="SexLabel" class="">SEXO</label>
-                        <input type="text" class="form-control" name="sexo" value="{{info[12]}}">
-                        
+                        <select class="form-select" name="sexo">
+                            <option selected>Elige uno</option>
+                            <option value="FEMENINO">FEMENINO</option>
+                            <option value="MASCULINO">MASCULINO</option>
+                            <option value="OTRX">OTRX</option>
+                        </select>
+
+
                         <label for="TitLabel" class="">TÍTULO</label>
                         <input type="text" class="form-control" name="titulo" value="{{info[13]}}">
-
-                        <label for="CalleLabel" class="">CALLE</label>
-                        <input type="text" class="form-control" name="calle" value="{{info[14]}}">
-
-                        <label for="NumLabel" class="">NÚMERO</label>
-                        <input type="text" class="form-control" name="numero" value="{{info[15]}}">
-
-                        <label for="PisoLabel" class="">PISO</label>
-                        <input type="text" class="form-control" name="piso" value="{{info[16]}}">
-
-                        <label for="DptoLabel" class="">DEPARTAMENTO</label>
-                        <input type="text" class="form-control" name="departamento" value="{{info[17]}}">
-
-                        <label for="MzaLabel" class="">MANZANA</label>
-                        <input type="text" class="form-control" name="manzana" value="{{info[18]}}">
-
-                        <label for="BarrioLabel" class="">BARRIO</label>
-                        <input type="text" class="form-control" name="barrio" value="{{info[19]}}">
-
-                        <label for="CpLabel" class="">CP</label>
-                        <input type="text" class="form-control" name="cp" value="{{info[20]}}">
-
-                        <label for="ProvLabel" class="">PROVINCIA</label>
-                        <input type="text" class="form-control" name="provincia" value="{{info[21]}}">
-
-                        <label for="ObsLabel" class="">OBSERVACIONES</label>
-                        <input type="text" class="form-control" name="observaciones" value="{{info[25]}}">
-                    </div>
 
                         <button type="submit" class="btn btn-success  fw-bold">GUARDAR</button>
                 </form>
